@@ -1,0 +1,74 @@
+﻿@model TaskManager.Models.TaskList
+@using TaskManager.Models
+
+@foreach (var item in Model.Items)
+{
+	<li class="liTask liTaskRow" title="@(item.StatusId == Status.Completed ? "Completed Task": "In Progress Task")" data-itemid="@item.TaskId" data-statusId="@item.StatusId">
+		<div class="divTaskRow @(item.StatusId == Status.Completed ? "divTaskCompRow":"")">
+			<div class="row">
+				<div class="col-lg-11">
+					<span class="spanTaskName @(item.StatusId == Status.Completed ? "text-italic": "")">@item.Name</span>
+				</div>
+				<div class="col-lg-1">
+					<div class="float-end">
+						<div class="menubar">
+							<ul>
+								<li>
+									<div class="list-icon-bgcss" title=""></div>
+									<ul class="actionuls" style="display:none">
+										<li><span class="btnEditTask" keyid="@item.TaskId" onclick="AddorEditTask(this)">Edit</span></li>
+										<li><span class="btnDeleteTask" keyid="@item.TaskId" onclick="DeleteTask(this)">Delete</span></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-1">
+					<label>Priority</label>
+				</div>
+				<div class="col-lg-2">
+					<span class="@(item.Priority == 1? "spanLow":(item.Priority == 2 ? "spanMedium":(item.Priority == 3 ? "spanHigh":"")))">
+						@(TaskManager.Models.Priority.GetPriorityList().Where(p => p.Value == item.Priority.ToString()).Select(x => x.Text).FirstOrDefault())
+					</span>
+				</div>
+				<div class="col-lg-1">
+					<label>DueDate</label>
+				</div>
+				<div class="col-lg-2">
+					@item.DueDate
+				</div>
+				<div class="col-lg-6">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-1">
+					<label>Assignee</label>
+				</div>
+				<div class="col-lg-2">
+					@item.Asignee
+				</div>
+				<div class="col-lg-1">
+					<label>Status</label>
+				</div>
+				<div class="col-lg-2">
+					<span class="@(item.StatusId == Status.Completed ? "divCompleted":"")">@(item.StatusId == Status.Completed ? "Completed" : "Active")</span>
+				</div>
+				<div class="col-lg-6">
+				</div>
+			</div>
+		</div>
+
+	</li>
+}
+		
+<script>
+
+	$("#hdnTotalCount").val(@Model.TotalCount);
+	$("#hdnActiveCount").val(@Model.ActiveCount);
+
+</script>

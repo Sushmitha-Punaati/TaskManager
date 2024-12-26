@@ -1,0 +1,112 @@
+﻿@model TaskManager.Models.Taskmodel
+@using TaskManager.Models
+
+<style>
+
+	.divContianer div {
+		padding: 5px 5px;
+	}
+
+	.divTitle {
+		font-size: 1rem;
+	}
+
+	.spanDisplay{
+		padding :5px;
+		border-radius: 5px;	
+		background: antiquewhite;
+	}
+</style>
+
+<div class="divContianer">
+
+	<div class="row">
+		<div class="col-lg-12 divTitle">
+			@Html.DisplayFor(m => m.Name)
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<label for="Description">Description</label>
+			<div contenteditable="false" class="tinyTaskDesc w-100" data-origtext="@(Model.Description ?? "")">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<label for="Priority">Priority</label>
+			<span class="@(Model.Priority == 1? "spanLow":(Model.Priority == 2 ? "spanMedium":(Model.Priority == 3 ? "spanHigh":"")))">
+				@(Model.PriorityList.Where(p => p.Value == Model.Priority.ToString()).Select(x => x.Text).FirstOrDefault())
+			</span>
+		</div>
+
+		<div class="col-md-3">
+			<label for="DueDate">DueDate</label>
+			<span class="@(Model.DueDate == null ?"":"spanDisplay")">@Html.DisplayFor(m => m.DueDate)</span>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<label for="Asignee">Assignee</label>
+			<span class="@(string.IsNullOrEmpty(Model.Asignee)?"":"spanDisplay")">@Html.DisplayFor(m => m.Asignee)</span>
+		</div>
+
+		<div class="col-md-3">
+			<label for="Status">Status </label>
+			<span class="@(Model.StatusId == Status.Completed ? "divCompleted":"spanDisplay")">@(Model.StatusId == Status.Completed ? "Completed" : "Active")</span>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function () {
+		var tinyMCECount = 0;
+		var ele = $(".tinyTaskDesc").first();
+
+		if (ele.id == undefined && $(ele).attr('data-origtext') != "") {
+
+			var id = "txtTiny_" + tinyMCECount;
+			$(ele).attr("id", id);
+			tinyMCECount++;
+			var itemText = $(ele).attr('data-origtext');
+			IntiateTinyMceBasic("#" + id, itemText);
+		}
+
+	});
+
+	var IntiateTinyMceBasic = function (id, itemText) {
+
+		var el = document.createElement('div');
+		$(el).insertBefore(id);
+		var toolbar = "";
+		tinymce.init({
+			selector: id,
+			menubar: false,
+			statusbar: false,
+			readonly: true,
+			disabled: true,
+			toolbar: toolbar,
+			fixed_toolbar_container_target: el,			
+			fontsize_formats: "8pt 9pt 10pt 11pt 12pt 14pt 18pt 24pt 30pt 36pt 48pt 60pt 72pt 96pt",
+			min_height:100,
+			height: 200,
+			max_height: 350,
+			plugins: [
+				"lists", "autoresize"
+			],
+			setup: function (ed) {
+
+				ed.on('init', function (e) {
+
+					ed.setContent(itemText);
+					$('em').replaceWith(function () {
+						return $("<i />", { html: $(this).html() });
+					});
+				});
+			}
+		});
+
+	};
+</script>
+<script src="~/tinymce/tinymce.min.js"></script>

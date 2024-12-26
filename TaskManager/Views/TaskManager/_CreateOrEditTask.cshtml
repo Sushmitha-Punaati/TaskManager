@@ -1,0 +1,81 @@
+﻿@model TaskManager.Models.Taskmodel
+@using TaskManager.Models
+
+<style>
+
+	.toggle.btn {
+		min-width: 59px;
+	}
+
+	.toggle-on.btn {
+		background-color: #e2b203 !important;
+		color: white !important;
+	}
+
+	.toggle-off.btn {
+		background-color: #28a745 !important;
+		color: white !important;
+	}
+
+	.toggle-handle {
+		background-color: white;
+	}
+
+	#frm_Task .form-group {
+		margin-bottom: 20px;
+	}
+
+    #frm_Task .form-group > label {
+	   margin-bottom: 5px;
+	   font-weight: bold;
+    }
+
+</style>
+
+<div class="container">
+	@using (Html.BeginForm(FormMethod.Post, false, new { id = "frm_Task", enctype = "multipart/form-data" }))
+	{
+		<div class="hdnFields">
+			@Html.HiddenFor(m => m.TaskId)
+			@Html.HiddenFor(m => m.StatusId, new { @id = "hdnStatusId" })
+			@Html.HiddenFor(m => m.Description, new { @id = "hdnTaskDesc" })
+		</div>
+
+		<div class="form-group">
+			<label for="Name">Title</label>
+			@Html.TextBoxFor(m => m.Name, new { @id = "txtTaskName", @class = "form-control" })
+			@Html.ValidationMessageFor(m => m.Name)
+		</div>
+		<div class="form-group">
+			<label for="Description">Description</label>
+			<div class="tinyTaskDesc w-100" style="border: 1px solid;height:100px;" data-origtext="@(Model.Description ?? "")">
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-md-3">
+				<label for="Priority">Priority</label>
+				@Html.DropDownListFor(m => m.Priority, Model.PriorityList, "Select", new { @id = "ddlPriorityList", @class = "form-control" })
+			</div>
+
+			<div class="form-group col-md-3">
+				<label for="Asignee">DueDate</label>
+				@Html.TextBoxFor(m => m.DueDate, new { @id = "txtDueDate", @class = "form-control" })
+			</div>
+
+			<div class="form-group col-md-3">
+				<label for="Asignee">Assign Member</label>
+				@Html.TextBoxFor(m => m.Asignee, new { @id = "txtMember", @class = "form-control" })
+			</div>
+
+			<div class="form-group col-md-3">
+				<label for="Status">Status </label><br />
+				<input type="checkbox" class="form-control" id="toggleStatus"
+					   data-toggle="toggle" data-on="Active" data-off="Completed" data-size="small"
+					   data-width="120" data-height="30" tabindex="13" @(Model.TaskId > 0 ? "" : "disabled") @(Model.StatusId == 1 || Model.TaskId == 0 ? "checked" : "")>
+			</div>
+		</div>
+	}
+</div>
+
+<script src="~/js/Task//EditTask.js"></script>
+<script src="~/tinymce/tinymce.min.js"></script>

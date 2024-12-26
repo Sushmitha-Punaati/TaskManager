@@ -1,0 +1,143 @@
+html, body {
+    height: 100%;
+}
+body {
+    font-size: 0.8rem !important; 
+    font-family: 'Arial', sans-serif !important;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: inherit; 
+}
+.height100{
+    height: 100%;
+}
+.width55 {
+    width: 55%;
+}
+
+.width15 {
+    width: 15%;
+}
+
+.width10 {
+    width: 10%;
+}
+
+.width5 {
+    width: 5%;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.error {
+    color: red;
+}
+
+.width60 {
+    width: 60%
+}
+
+.width9 {
+    width: 9%
+}
+
+.width16 {
+    width: 16%
+}
+
+.hidecontent {
+    display: none;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 .15rem #ffffff;
+}
+
+.ui-dialog-titlebar, .ui-button, .btn-primary {
+    background: #00a6ec !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    font-size: 0.8rem !important;
+}
+
+.btn-default {
+    font-size: 0.8rem !important;
+}
+
+.form-control {
+    font-size: 0.8rem !important;
+}
+.ui-icon {
+    color: #fff !important;
+    background-image: url(/css/jquery-ui/images/ui-icons_ffffff_256x240.png) !important;
+}
+.ui-button:hover, .btn-primary:hover {
+    background-color: #0496d3 !important;
+    color: #fff !important;
+    cursor: pointer;
+}
+
+.container-fluid{
+    padding : 0 !important;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.tox-tinymce--disabled {
+    border: none !important;
+}
+
+.loader {
+    background: url("../images/wheel3.gif") no-repeat scroll center #666 !important;
+    display: inline-block;
+    font-size: 0;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999999;
+    opacity: .5;
+}
+
+.ui-widget-header.ulTasks .ui-state-default {
+    border-color: #ababab;
+    background: #ffffff !important;
+    padding-bottom: 1px;
+    margin-right: 5px;
+}
+
+    .ui-widget-header.ulTasks .ui-state-default a {
+        color: black;
+        font-weight: 500;
+        padding: .3em 1em 6px;
+        letter-spacing: 0.4px;
+    }
+
+.ui-widget-header.ulTasks .ui-state-active {
+    background: #00a6ec !important;
+    border-color: #00a6ec #00a6ec #ffffff !important;
+    border-width: 1px;
+    margin-bottom: -2px !important;
+}
+
+.ui-widget-header.ulTasks .ui-state-active a {
+    color: #ffffff;
+    font-weight: bold;
+}

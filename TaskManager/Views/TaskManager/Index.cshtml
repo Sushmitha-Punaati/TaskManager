@@ -1,0 +1,50 @@
+﻿@using TaskManager.Models
+
+<div class="divTaskManager height100">
+	<div class="divFilters float-end w-100">
+		<div class="divfilterItem divTitle">
+			<span class="page-title">Task Manager</span>
+		</div>
+		<div class="divfilterItem">
+			<div class="divActiveCount">Active <span class="spanActiveCount"></span></div>
+		</div>
+		<div class="divfilterItem">
+			<select class="ddlStatus form-control">
+				<option value="@Status.All">All Tasks</option>
+				<option value="@Status.Active">Active Tasks</option>
+				<option value="@Status.Completed">Completed Tasks</option>
+			</select>
+		</div>
+		<div class="divfilterItem">
+			<button type="button" class="btn btn-primary" id="btnAddTask" onclick="AddorEditTask(this)">Add Task</button>
+		</div>
+		<div class="divfilterItem">
+			<button type="button" class="btn btn-primary" onclick="DeleteAllCompTasks(this)" id="btnDeleteCompTasks">Delete Completed Tasks</button>
+		</div>
+	</div>
+
+	<div class="divtableBody">
+		<div class="divWrapper">
+			<div title="Tasks">
+				<h2>
+					<span class="spanTaskTitle">TASKS <span class="spanNoOfRecords"></span></span>
+				</h2>
+			</div>
+			<section class="secTasks">
+				<ul class="ulTasks">
+					<li class="liTask liTaskNoResults">
+						<div class="divNoResults text-center hidecontent">
+							<span>No Results Found</span>
+						</div>
+					</li>
+				</ul>
+				<input type="hidden" id="hdnTotalCount" value="" />
+				<input type="hidden" id="hdnActiveCount" value="" />
+			</section>
+		</div>
+	</div>
+</div>
+
+
+<script src="~/js/Task/TaskIndex.js"></script>
+<link rel="stylesheet" href="~/css/custom-styles.css" />
